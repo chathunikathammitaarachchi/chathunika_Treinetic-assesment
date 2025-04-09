@@ -1,44 +1,57 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "./authSlice";
+import { signup, login } from "../api/authSlice";
 import { TextField, Button, Box, Typography, Paper, Grid, Avatar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import LockIcon from '@mui/icons-material/Lock';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
-const Login = () => {
+const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
 
-    
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
     if (username && password) {
       const user = { username, savedRecipes: [] };
-      dispatch(login(user)); 
-      navigate("/"); 
+
+      // Dispatch signup and login
+      dispatch(signup(user)).then(() => {
+        // Automatically login after successful signup
+        dispatch(login(user));
+        navigate("/"); // Redirect to home page
+      }).catch(err => {
+        alert("Signup failed: " + err.message);
+      });
     } else {
-      alert("Please enter a valid username and password");
+      alert("Please fill in all fields correctly");
     }
   };
 
   return (
     <Grid container justifyContent="center" alignItems="center" style={{ minHeight: "100vh" }}>
-      <Grid xs={12} sm={8} md={6}> 
+      <Grid item xs={12} sm={8} md={6}>
         <Paper elevation={3} sx={{ padding: 4 }}>
           <Box sx={{ display: "flex", justifyContent: "center", marginBottom: 3 }}>
             <Avatar sx={{ backgroundColor: "primary.main", width: 60, height: 60 }}>
-              <LockIcon />
+              <PersonAddIcon />
             </Avatar>
           </Box>
 
           <Typography variant="h5" align="center" gutterBottom>
-            Login
+            Sign Up
           </Typography>
 
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleSignup}>
             <TextField
               label="Username"
               variant="outlined"
@@ -58,6 +71,16 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <TextField
+              label="Confirm Password"
+              type="password"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
             <Button
               type="submit"
               variant="contained"
@@ -65,13 +88,22 @@ const Login = () => {
               fullWidth
               sx={{ marginTop: 2 }}
             >
-              Login
+              Sign Up
             </Button>
           </form>
+
+          <Box sx={{ marginTop: 2, textAlign: 'center' }}>
+            <Typography variant="body2">
+              Already have an account?{' '}
+              <Button onClick={() => navigate('/login')} color="primary">
+                Login
+              </Button>
+            </Typography>
+          </Box>
         </Paper>
       </Grid>
     </Grid>
   );
 };
 
-export default Login;
+export default Signup;

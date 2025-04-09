@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';  
 import { Typography, Button, Card, CardContent } from '@mui/material';  
-import { addFavorite, removeFavorite } from '../features/favorites/favoritesSlice';
+import { addFavorite, removeFavorite } from '../api/favoritesSlice';
 
 const RecipeCard = ({ recipe }) => {
   const dispatch = useDispatch();

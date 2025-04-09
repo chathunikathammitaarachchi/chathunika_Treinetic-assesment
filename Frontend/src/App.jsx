@@ -1,18 +1,18 @@
 import React from 'react';
-import { ThemeProvider } from './theme/ThemeContext';
+import { ThemeProvider } from './components/ThemeContext';
 import { Button, AppBar, Toolbar, Typography, CssBaseline, Container } from '@mui/material';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useThemeContext } from './theme/ThemeContext';  
-import Profile from "./features/auth/UserProfile"
+import { useThemeContext } from './components/ThemeContext';  
+import Profile from "./components/UserProfile"
 import RecipeFeed from './components/RecipeFeed';
 
-import EditRecipePage from './pages/EditRecipePage';
+import EditRecipePage from './components/EditRecipePage';
 import RecipeDetail from './components/RecipeDetails';
-import Login from './features/auth/Login';
-import Signup from './features/auth/Signup';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import FavoritesPage from './components/FavouritesPage';
-import AddRecipe from './features/recipes/AddRecipes';
+import AddRecipe from './components/AddRecipes';
 
 const App = () => {
   const { mode, toggleTheme } = useThemeContext(); 

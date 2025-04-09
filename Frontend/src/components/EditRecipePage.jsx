@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateRecipe } from "../features/recipes/recipesSlice";
+import { updateRecipe } from "../api/recipesSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { TextField, Button, Grid, Paper, Typography, Box } from "@mui/material";
 

@@ -3,9 +3,11 @@ import { Box, Grid, TextField, Card, CardContent, CardMedia, Typography, Rating,
 import { Link } from "react-router-dom"; 
 import { recipes } from "../api/mockData"; 
 
+
 const RecipeFeed = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredRecipes, setFilteredRecipes] = useState(recipes);
+  
 
   const handleSearchChange = (event) => {
     const query = event.target.value.toLowerCase();
