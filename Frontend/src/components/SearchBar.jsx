@@ -7,7 +7,7 @@ const SearchBar = () => {
   const [searchText, setSearchText] = useState('');
   const theme = useTheme();
 
-  // Handle search input change
+  
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
   };

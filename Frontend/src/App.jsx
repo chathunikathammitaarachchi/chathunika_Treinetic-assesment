@@ -6,12 +6,13 @@ import { useSelector } from 'react-redux';
 import { useThemeContext } from './theme/ThemeContext';  
 import Profile from "./features/auth/UserProfile"
 import RecipeFeed from './components/RecipeFeed';
-import RecipeForm from './components/RecipeForm';
+
 import EditRecipePage from './pages/EditRecipePage';
 import RecipeDetail from './components/RecipeDetails';
 import Login from './features/auth/Login';
 import Signup from './features/auth/Signup';
 import FavoritesPage from './components/FavouritesPage';
+import AddRecipe from './features/recipes/AddRecipes';
 
 const App = () => {
   const { mode, toggleTheme } = useThemeContext(); 
@@ -35,7 +36,7 @@ const App = () => {
           {isAuthenticated ? (
             <>
               <Button color="inherit" onClick={() => navigate('/')}>Home</Button>
-              <Button color="inherit" onClick={() => navigate('/add-recipe')}>Add Recipe</Button>
+              <Button color="inherit" onClick={() => navigate('/profile')}>Profile</Button>
               <Button color="inherit" onClick={() => navigate('/login')}>Logout</Button>
             </>
           ) : (
@@ -48,12 +49,15 @@ const App = () => {
         <Routes>
           <Route path="/" element={isAuthenticated ? <RecipeFeed /> : <Signup />} />
           <Route path="/recipe/:id" element={<RecipeDetail />} />
-          <Route path="/add-recipe" element={isAuthenticated ? <RecipeForm /> : <Login />} />
+          <Route path="/add-recipe" element={isAuthenticated ? <AddRecipe /> : <Login />} />
           <Route path="/edit-recipe/:id" element={isAuthenticated ? <EditRecipePage /> : <Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          
+       
+        
         </Routes>
       </Container>
     </>

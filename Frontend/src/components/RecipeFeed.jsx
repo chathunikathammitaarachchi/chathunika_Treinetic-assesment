@@ -7,13 +7,11 @@ const RecipeFeed = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredRecipes, setFilteredRecipes] = useState(recipes);
 
- 
   const handleSearchChange = (event) => {
     const query = event.target.value.toLowerCase();
     setSearchQuery(query);
 
     const filtered = recipes.filter((recipe) => {
-      
       return (
         recipe.title.toLowerCase().includes(query) ||
         recipe.ingredients.some((ingredient) =>
@@ -25,7 +23,6 @@ const RecipeFeed = () => {
     setFilteredRecipes(filtered);
   };
 
- 
   useEffect(() => {
     if (!searchQuery) {
       setFilteredRecipes(recipes); 
@@ -34,7 +31,6 @@ const RecipeFeed = () => {
 
   return (
     <Container sx={{ padding: 4 }}>
-    
       <Box sx={{ marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
         <TextField
           label="Search Recipes"
@@ -62,7 +58,6 @@ const RecipeFeed = () => {
         />
       </Box>
 
-     
       <Grid container spacing={4}>
         {filteredRecipes.map((recipe) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={recipe.id}> 
@@ -78,7 +73,6 @@ const RecipeFeed = () => {
                 boxShadow: 12,
               },
             }}>
-              
               <CardMedia
                 component="img"
                 height="200"
@@ -92,11 +86,10 @@ const RecipeFeed = () => {
                     filter: 'brightness(100%)',
                   }
                 }}
-                onError={(e) => { e.target.onerror = null; e.target.src = ''; }} // Fallback image
+                onError={(e) => { e.target.onerror = null; e.target.src = ''; }} 
               />
 
               <CardContent sx={{ padding: 2 }}>
-               
                 <Typography variant="h6" sx={{
                   fontWeight: 'bold',
                   color: '#333',
@@ -111,12 +104,10 @@ const RecipeFeed = () => {
                   {recipe.title}
                 </Typography>
 
-               
                 <Typography variant="body2" color="textSecondary" sx={{ marginTop: 1, textAlign: 'center' }}>
                   Cooking Time: {recipe.cookingTime} mins
                 </Typography>
 
-                
                 <Box sx={{
                   display: 'flex',
                   justifyContent: 'center',
@@ -129,7 +120,6 @@ const RecipeFeed = () => {
                   </Typography>
                 </Box>
 
-               
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
                   <Link to={`/recipe/${recipe.id}`} style={{ textDecoration: 'none' }}>
                     <Button
@@ -156,6 +146,7 @@ const RecipeFeed = () => {
         ))}
       </Grid>
     </Container>
+    
   );
 };
 

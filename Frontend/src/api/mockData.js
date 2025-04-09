@@ -1,4 +1,4 @@
-// src/api/mockData.js
+
 
 export const recipes = [
     {
@@ -84,7 +84,7 @@ export const recipes = [
   ];
   
   
-  // Define initial recipe data
+  
   export const initialRecipes = [
     {
       id: 1,
@@ -98,59 +98,58 @@ export const recipes = [
     
   ];
   
-  // Define initial user data
+ 
   export const initialUsers = [
     {
       id: 1,
       username: "john_doe",
-      savedRecipes: [1],  // Reference recipe IDs
+      savedRecipes: [1],  
     },
     {
       id: 2,
       username: "jane_doe",
       savedRecipes: [1, 2],
     },
-    // More users...
+    
   ];
   
-  // Add a recipe function
+  
   export const addRecipe = (recipeData) => {
     const newRecipe = {
       ...recipeData,
-      id: Math.floor(Math.random() * 10000), // Random ID for new recipes
+      id: Math.floor(Math.random() * 10000), 
     };
-    initialRecipes.push(newRecipe); // Add to the initialRecipes array
+    initialRecipes.push(newRecipe); 
     return newRecipe;
   };
-  
-  // Update a recipe function
+ 
   export const updateRecipe = (updatedRecipe) => {
     const index = initialRecipes.findIndex(recipe => recipe.id === updatedRecipe.id);
     if (index !== -1) {
-      initialRecipes[index] = updatedRecipe; // Update recipe in the array
+      initialRecipes[index] = updatedRecipe; 
       return updatedRecipe;
     }
     return null;
   };
   
-  // Delete a recipe function
+  
   export const deleteRecipe = (id) => {
     const index = initialRecipes.findIndex(recipe => recipe.id === id);
     if (index !== -1) {
-      const deletedRecipe = initialRecipes.splice(index, 1); // Remove the recipe from the array
-      return deletedRecipe[0]; // Return the deleted recipe
+      const deletedRecipe = initialRecipes.splice(index, 1); 
+      return deletedRecipe[0]; 
     }
     return null;
   };
   
-  // Fetch all recipes function
+
   export const fetchRecipes = () => {
-    return initialRecipes; // Return the entire list of recipes
+    return initialRecipes; 
   };
   
-  // Fetch a recipe by ID function
+ 
   export const fetchRecipeById = (id) => {
-    const recipe = initialRecipes.find((recipe) => recipe.id === id); // Find the recipe by ID
-    return recipe || null; // Return the recipe or null if not found
+    const recipe = initialRecipes.find((recipe) => recipe.id === id); 
+    return recipe || null; 
   };
   

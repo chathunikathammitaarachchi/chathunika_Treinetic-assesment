@@ -1,37 +1,68 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteRecipe } from "../features/recipes/recipesSlice";
-import { Card, CardContent, Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteRecipe } from "./recipesSlice";
+import { Card, CardContent, CardMedia, Button, Typography, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-const RecipeList = () => {
+const Home = () => {
+  const recipes = useSelector((state) => state.recipes); 
   const dispatch = useDispatch();
-  const recipes = useSelector((state) => state.recipes.recipes);
+  const navigate = useNavigate();
 
-  const handleDelete = (id) => {
-    dispatch(deleteRecipe(id));
+  const handleEditRecipe = (id) => {
+    navigate(`/edit-recipe/${id}`); 
+  };
+
+  const handleDeleteRecipe = (id) => {
+    dispatch(deleteRecipe(id)); 
   };
 
   return (
-    <div>
-      {recipes.map((recipe) => (
-       <Card key={recipe.id} sx={{ marginBottom: 2 }}>
-       <CardContent>
-         <Typography variant="h6">{recipe.title}</Typography>
-         <img src={recipe.image} alt={recipe.title} style={{ width: "100%", height: "auto" }} />
-         <Typography variant="body2">{recipe.instructions.slice(0, 100)}...</Typography>
-         <Button component={Link} to={`/edit/${recipe.id}`} variant="outlined" sx={{ marginRight: 2 }}>
-           Edit
-         </Button>
-         <Button onClick={() => handleDelete(recipe.id)} variant="contained" color="error">
-           Delete
-         </Button>
-       </CardContent>
-     </Card>
-     
-      ))}
-    </div>
+    <Box sx={{ padding: 4 }}>
+      <Typography variant="h4" gutterBottom sx={{ textAlign: "center" }}>
+        All Recipes
+      </Typography>
+
+      {recipes.length === 0 ? (
+        <Typography variant="h6" color="textSecondary" sx={{ textAlign: "center" }}>
+          No recipes available. Add some!
+        </Typography>
+      ) : (
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
+          {recipes.map((recipe) => (
+            <Card key={recipe.id} sx={{ maxWidth: 345 }}>
+              <CardMedia
+                component="img"
+                height="140"
+                image={recipe.image}
+                alt={recipe.title}
+              />
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  {recipe.title}
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleEditRecipe(recipe.id)}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => handleDeleteRecipe(recipe.id)}
+                  sx={{ marginLeft: 1 }}
+                >
+                  Delete
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </Box>
+      )}
+    </Box>
   );
 };
 
-export default RecipeList;
+export default Home;

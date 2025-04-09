@@ -1,9 +1,8 @@
 import { initialRecipes, initialUsers } from './mockData';
 
-// Helper to simulate API delay
+
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-// Initialize local storage with mock data if empty
 const initializeLocalStorage = () => {
   if (!localStorage.getItem('recipes')) {
     localStorage.setItem('recipes', JSON.stringify(initialRecipes));
@@ -15,9 +14,9 @@ const initializeLocalStorage = () => {
 
 initializeLocalStorage();
 
-// Recipe API functions
+
 export const fetchRecipes = async () => {
-  await delay(500); // Simulate network request
+  await delay(500); 
   const recipes = JSON.parse(localStorage.getItem('recipes'));
   return recipes;
 };
@@ -62,7 +61,7 @@ export const deleteRecipe = async (id) => {
   return id;
 };
 
-// Auth API functions
+
 export const loginUser = async (credentials) => {
   await delay(500);
   const users = JSON.parse(localStorage.getItem('users'));
@@ -71,7 +70,7 @@ export const loginUser = async (credentials) => {
   );
   if (!user) throw new Error('Invalid credentials');
   
-  // Don't send password to the frontend
+
   const { password, ...userWithoutPassword } = user;
   return userWithoutPassword;
 };
@@ -80,7 +79,7 @@ export const registerUser = async (userData) => {
   await delay(500);
   const users = JSON.parse(localStorage.getItem('users'));
   
-  // Check if user already exists
+  
   if (users.some(u => u.email === userData.email)) {
     throw new Error('User already exists');
   }
@@ -93,8 +92,7 @@ export const registerUser = async (userData) => {
   
   const updatedUsers = [...users, newUser];
   localStorage.setItem('users', JSON.stringify(updatedUsers));
-  
-  // Don't send password to the frontend
+
   const { password, ...userWithoutPassword } = newUser;
   return userWithoutPassword;
 };

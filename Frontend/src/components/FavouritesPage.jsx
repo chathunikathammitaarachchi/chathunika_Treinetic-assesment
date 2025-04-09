@@ -1,4 +1,4 @@
-// src/components/FavoritesPage.js
+
 import React from 'react';
 import { useSelector } from 'react-redux';
 import RecipeCard from './RecipeCard'; 
