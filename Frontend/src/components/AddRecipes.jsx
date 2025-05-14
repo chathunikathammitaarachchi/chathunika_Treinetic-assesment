@@ -70,7 +70,7 @@ const RecipeApp = () => {
       if (activeTab === 0) {
         setFilteredRecipes(recipes); 
       } else {
-        setFilteredRecipes(recipes.filter(recipe => recipe.userId === currentUser)); // Only user recipes
+        setFilteredRecipes(recipes.filter(recipe => recipe.userId === currentUser)); 
       }
     }
   }, [searchQuery, recipes, activeTab]);
