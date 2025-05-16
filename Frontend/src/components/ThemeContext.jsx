@@ -2,6 +2,20 @@ import { createContext, useState, useMemo, useContext } from 'react';
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+
+const loginTheme = createTheme({
+  components: {
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: '#0047AB',
+        },
+      },
+    },
+  },
+});
+
+
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
@@ -17,7 +31,7 @@ export const ThemeProvider = ({ children }) => {
     palette: {
       mode,
       primary: {
-        main: mode === 'light' ? '#8BC34A' : '#AED581', 
+        main: mode === 'light' ? '#0047AB' : '#AED581', 
         light: '#DCEDC8',
         dark: '#689F38',
       },
@@ -70,6 +84,7 @@ export const ThemeProvider = ({ children }) => {
       },
     },
   },
+  
 }
 
   }), [mode]);
